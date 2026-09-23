@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Expert call analyst</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap">
+  <link rel="stylesheet" href="/static/app.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="top">
+    <div class="wrap top-row">
+      <div>
+        <h1>Expert call analyst</h1>
+        <p id="project" class="sub"></p>
+      </div>
+      <button id="analyze-btn" class="btn primary" type="button">Analyze calls</button>
+    </div>
+    <nav class="wrap tabs" role="tablist" aria-label="Views">
+      <button class="tab" role="tab" id="tab-guide" aria-controls="panel-guide" data-tab="guide">Guide answers</button>
+      <button class="tab" role="tab" id="tab-themes" aria-controls="panel-themes" data-tab="themes">Themes and disagreements</button>
+      <button class="tab" role="tab" id="tab-ask" aria-controls="panel-ask" data-tab="ask">Ask the transcripts</button>
+      <button class="tab" role="tab" id="tab-transcripts" aria-controls="panel-transcripts" data-tab="transcripts">Transcripts</button>
+    </nav>
+  </header>
+
+  <main id="main" class="wrap">
+    <div id="notice" role="alert" class="notice" hidden></div>
+    <div id="statusbar" class="statusbar" hidden></div>
+
+    <section id="panel-guide" role="tabpanel" aria-labelledby="tab-guide" tabindex="-1"></section>
+    <section id="panel-themes" role="tabpanel" aria-labelledby="tab-themes" tabindex="-1" hidden></section>
+
+    <section id="panel-ask" role="tabpanel" aria-labelledby="tab-ask" tabindex="-1" hidden>
+      <div class="chat">
+        <div id="chat-log" aria-live="polite"></div>
+        <div class="composer">
+          <label for="question" class="sr">Your question about the transcripts</label>
+          <textarea id="question" rows="2" maxlength="2000" placeholder="Ask anything the experts might have said. Answers cite the transcript."></textarea>
+          <button id="ask-btn" class="btn primary" type="button">Ask</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="panel-transcripts" role="tabpanel" aria-labelledby="tab-transcripts" tabindex="-1" hidden>
+      <details class="manage">
+        <summary>Replace the transcripts</summary>
+        <div class="manage-body">
+          <p>Upload plain-text transcripts. Each turn needs a timestamp line (00:18) followed by <code>Speaker: text</code>.</p>
+          <label>Transcripts <input id="file-transcripts" type="file" accept=".txt,text/plain" multiple></label>
+          <label>Interview guide (optional) <input id="file-guide" type="file" accept=".txt,text/plain"></label>
+          <div class="row-actions">
+            <button id="upload-btn" class="btn" type="button">Upload files</button>
+            <button id="sample-btn" class="btn" type="button">Use the sample calls</button>
+          </div>
+        </div>
+      </details>
+      <div id="transcript-view"></div>
+    </section>
+  </main>
+
+  <aside id="drawer" class="drawer" aria-hidden="true" aria-labelledby="drawer-title">
+    <div class="drawer-head">
+      <div>
+        <h2 id="drawer-title"></h2>
+        <p id="drawer-sub" class="sub"></p>
+      </div>
+      <button id="drawer-close" class="btn" type="button" aria-label="Close source">Close</button>
+    </div>
+    <div id="drawer-body"></div>
+    <button id="drawer-open" class="btn" type="button">Open in full transcript</button>
+  </aside>
+
+  <script src="/static/app.js" defer></script>
+</body>
+</html>
